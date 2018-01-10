@@ -1,13 +1,19 @@
-package model;
+package guru.springframework.spring5webapp.model;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
 public class Author {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String firsName;
     private String lastName;
 
+    @ManyToMany(mappedBy = "authors")
     private Set<Book> books = new HashSet<>();
 
     public Author(String firsName, String lastName) {
@@ -15,6 +21,13 @@ public class Author {
         this.lastName = lastName;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getFirsName() {
         return firsName;
     }
@@ -38,4 +51,5 @@ public class Author {
     public void setBooks(Set<Book> books) {
         this.books = books;
     }
+
 }
